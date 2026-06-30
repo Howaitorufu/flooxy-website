@@ -261,9 +261,9 @@
             </div>
         </div>
 
-        <!-- Edit Profile Section -->
+        <!-- Customization Section -->
         <div class="profile-section">
-            <h3><i class="fas fa-user-edit"></i> Informations Personnelles</h3>
+            <h3><i class="fas fa-palette"></i> Personnalisation du Profil</h3>
             <div class="success-message" id="successMessage">
                 <i class="fas fa-check-circle"></i> Profil mis à jour avec succès!
             </div>
@@ -278,8 +278,82 @@
                         <input type="email" id="email">
                     </div>
                 </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="bio">Biographie</label>
+                        <textarea id="bio" style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,107,53,0.3); color: white; border-radius: 5px; font-family: inherit; min-height: 100px; resize: vertical;">Parlez-moi de vous...</textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="country">Pays/Région</label>
+                        <input type="text" id="country" placeholder="France">
+                    </div>
+                    <div class="form-group">
+                        <label for="favoriteGame">Jeu Préféré</label>
+                        <select id="favoriteGame" style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,107,53,0.3); color: white; border-radius: 5px;">
+                            <option value="">Sélectionner un jeu...</option>
+                            <option value="shadow-realm">Shadow Realm</option>
+                            <option value="neon-rush">Neon Rush</option>
+                            <option value="mythos">Mythos Legends</option>
+                            <option value="galaxy">Galaxy Wars</option>
+                            <option value="urban">Urban Chase</option>
+                            <option value="adventure">Adventure Quest</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="discord">Discord</label>
+                        <input type="text" id="discord" placeholder="Username#1234">
+                    </div>
+                    <div class="form-group">
+                        <label for="twitch">Twitch</label>
+                        <input type="text" id="twitch" placeholder="username">
+                    </div>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(255,107,53,0.1); border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem;">Préférences</h4>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <label style="margin: 0;">Profil Public</label>
+                            <div class="toggle">
+                                <input type="checkbox" id="profilePublic">
+                                <label for="profilePublic"></label>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <label style="margin: 0;">Notifications Email</label>
+                            <div class="toggle">
+                                <input type="checkbox" id="emailNotifs" checked>
+                                <label for="emailNotifs"></label>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <label style="margin: 0;">Mode Sombre</label>
+                            <div class="toggle">
+                                <input type="checkbox" id="darkMode" checked>
+                                <label for="darkMode"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="achievements">Compétences / Badges</label>
+                        <input type="text" id="achievements" placeholder="Ex: Pro FPS, Speedrunner, Collectionniste..." style="color: #aaa;">
+                    </div>
+                </div>
+
                 <div class="button-group">
-                    <button type="submit" class="btn btn-save">Enregistrer les modifications</button>
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i> Enregistrer les modifications
+                    </button>
                 </div>
             </form>
         </div>

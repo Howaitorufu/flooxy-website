@@ -456,7 +456,6 @@ app.post('/api/contact', (req, res) => {
 // Update user profile
 app.put('/api/user/profile', authenticateToken, async (req, res) => {
     try {
-        const { username } = req.body;
         const users = getUsers();
         const userIndex = users.findIndex(u => u.id === req.user.id);
 
@@ -464,17 +463,33 @@ app.put('/api/user/profile', authenticateToken, async (req, res) => {
             return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
-        if (username && username !== users[userIndex].username) {
-            if (!validateUsername(username)) {
-                return res.status(400).json({ message: 'Nom d\'utilisateur invalide' });
-            }
+        const user = users[userIndex];
 
-            if (users.some(u => u.username === username && u.id !== req.user.id)) {
-                return res.status(409).json({ message: 'Ce nom d\'utilisateur est déjà pris' });
+        // Update allowed fields
+        if (req.body.email && req.body.email !== user.email) {
+            if (!validateEmail(req.body.email)) {
+                return res.status(400).json({ message: 'Email invalide' });
             }
-
-            users[userIndex].username = username;
+            if (users.some(u => u.email === req.body.email && u.id !== req.user.id)) {
+                return res.status(409).json({ message: 'Cet email est déjà utilisé' });
+            }
+            user.email = req.body.email;
         }
+
+        // Personalization fields
+        if (req.body.bio) user.bio = req.body.bio;
+        if (req.body.country) user.country = req.body.country;
+        if (req.body.favoriteGame) user.favoriteGame = req.body.favoriteGame;
+        if (req.body.discord) user.discord = req.body.discord;
+        if (req.body.twitch) user.twitch = req.body.twitch;
+        if (req.body.achievements) user.achievements = req.body.achievements;
+
+        // Preferences
+        user.profilePublic = req.body.profilePublic !== false;
+        user.emailNotifs = req.body.emailNotifs !== false;
+        user.darkMode = req.body.darkMode !== false;
+
+        user.updatedAt = new Date();
 
         saveUsers(users);
         backupDatabase();
@@ -482,9 +497,18 @@ app.put('/api/user/profile', authenticateToken, async (req, res) => {
         res.json({
             message: 'Profil mis à jour',
             user: {
-                id: users[userIndex].id,
-                username: users[userIndex].username,
-                email: users[userIndex].email
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                bio: user.bio,
+                country: user.country,
+                favoriteGame: user.favoriteGame,
+                discord: user.discord,
+                twitch: user.twitch,
+                achievements: user.achievements,
+                profilePublic: user.profilePublic,
+                emailNotifs: user.emailNotifs,
+                darkMode: user.darkMode
             }
         });
 

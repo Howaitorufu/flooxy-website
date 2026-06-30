@@ -73,6 +73,17 @@ function displayProfile(user) {
     document.getElementById('username').value = user.username;
     document.getElementById('email').value = user.email;
 
+    // Customization fields
+    document.getElementById('bio').value = user.bio || '';
+    document.getElementById('country').value = user.country || '';
+    document.getElementById('favoriteGame').value = user.favoriteGame || '';
+    document.getElementById('discord').value = user.discord || '';
+    document.getElementById('twitch').value = user.twitch || '';
+    document.getElementById('achievements').value = user.achievements || '';
+    document.getElementById('profilePublic').checked = user.profilePublic !== false;
+    document.getElementById('emailNotifs').checked = user.emailNotifs !== false;
+    document.getElementById('darkMode').checked = user.darkMode !== false;
+
     // Stats (exemple)
     document.getElementById('postsCount').textContent = Math.floor(Math.random() * 50);
     document.getElementById('likesCount').textContent = Math.floor(Math.random() * 500);
@@ -90,6 +101,19 @@ async function handleEditProfile(e) {
         return;
     }
 
+    const profileData = {
+        email,
+        bio: document.getElementById('bio').value,
+        country: document.getElementById('country').value,
+        favoriteGame: document.getElementById('favoriteGame').value,
+        discord: document.getElementById('discord').value,
+        twitch: document.getElementById('twitch').value,
+        achievements: document.getElementById('achievements').value,
+        profilePublic: document.getElementById('profilePublic').checked,
+        emailNotifs: document.getElementById('emailNotifs').checked,
+        darkMode: document.getElementById('darkMode').checked
+    };
+
     try {
         const response = await fetch(`${API_URL}/user/profile`, {
             method: 'PUT',
@@ -97,7 +121,7 @@ async function handleEditProfile(e) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
-            body: JSON.stringify({ email })
+            body: JSON.stringify(profileData)
         });
 
         const data = await response.json();
@@ -108,6 +132,10 @@ async function handleEditProfile(e) {
             setTimeout(() => {
                 document.getElementById('successMessage').classList.remove('show');
             }, 3000);
+
+            // Update local user data
+            Object.assign(currentUser, profileData);
+            localStorage.setItem('user', JSON.stringify(currentUser));
         } else {
             showNotification(data.message || 'Erreur lors de la mise à jour', 'error');
         }
