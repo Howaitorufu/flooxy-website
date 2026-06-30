@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - Fløøxy's Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.15), rgba(255, 107, 53, 0.05));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .profile-info h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            color: #aaa;
+            margin-bottom: 0.3rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .profile-section {
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.15), rgba(255, 107, 53, 0.05));
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .profile-section h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: white;
+            border-radius: 5px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-save {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-save:hover {
+            background: #ff5520;
+        }
+
+        .btn-cancel {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.8;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            background: rgba(40, 167, 69, 0.2);
+            color: var(--success);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-gamepad"></i>
+                <span>Fløøxy's Community</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="index.html#games" class="nav-link">Jeux</a></li>
+                <li><a href="index.html#community" class="nav-link">Communauté</a></li>
+                <li><a href="index.html#forum" class="nav-link">Forum</a></li>
+            </ul>
+            <div class="nav-auth">
+                <button class="btn-logout" id="logoutBtn">Déconnexion</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Page -->
+    <div class="profile-container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Retour à l'accueil
+        </a>
+
+        <!-- Header -->
+        <div class="profile-header">
+            <div class="profile-avatar" id="profileAvatar">U</div>
+            <div class="profile-info">
+                <h2 id="profileUsername">Chargement...</h2>
+                <p id="profileEmail">email@example.com</p>
+                <p id="profileMember">Membre depuis: <small id="memberDate">-</small></p>
+                <small id="profileRole" style="color: var(--primary); font-weight: bold;"></small>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="profile-stats" id="profileStats">
+            <div class="stat">
+                <div class="stat-value" id="postsCount">0</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="likesCount">0</div>
+                <div class="stat-label">J'aime reçus</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="gamesCount">0</div>
+                <div class="stat-label">Jeux joués</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="hoursCount">0</div>
+                <div class="stat-label">Heures jouées</div>
+            </div>
+        </div>
+
+        <!-- Edit Profile Section -->
+        <div class="profile-section">
+            <h3><i class="fas fa-user-edit"></i> Informations Personnelles</h3>
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i> Profil mis à jour avec succès!
+            </div>
+            <form id="editProfileForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" id="username" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email">
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn btn-save">Enregistrer les modifications</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Change Password Section -->
+        <div class="profile-section">
+            <h3><i class="fas fa-lock"></i> Sécurité</h3>
+            <form id="changePasswordForm">
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="oldPassword">Mot de passe actuel</label>
+                        <input type="password" id="oldPassword" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newPassword">Nouveau mot de passe</label>
+                        <input type="password" id="newPassword" required>
+                        <small style="color: #888;">Min. 8 caractères, 1 majuscule, 1 chiffre</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmer le mot de passe</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn btn-save">Changer le mot de passe</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="profile-section" style="border-left: 4px solid var(--danger);">
+            <h3><i class="fas fa-exclamation-triangle"></i> Zone Dangereuse</h3>
+            <p style="color: #aaa; margin-bottom: 1rem;">
+                Cette action est irréversible. Tous vos données seront supprimées.
+            </p>
+            <button class="btn btn-danger" id="deleteAccountBtn">
+                <i class="fas fa-trash"></i> Supprimer mon compte
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script src="profile.js"></script>
+</body>
+</html>
