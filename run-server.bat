@@ -1,29 +1,37 @@
 @echo off
+setlocal enabledelayedexpansion
+chcp 65001 >nul 2>&1
+
 cls
 echo.
-echo ========================================
 echo FLOOXY'S COMMUNITY - SERVER LAUNCHER
 echo ========================================
 echo.
-echo Verification des fichiers...
 
+REM Check if in correct directory
 if not exist "package.json" (
     echo ERREUR: package.json non trouve!
+    echo.
+    echo Assurez-vous d'etre dans le bon dossier:
+    echo C:\Users\Waxy360\Desktop\site internet
+    echo.
+    echo Dossier actuel: %cd%
+    echo.
     pause
     exit /b 1
 )
-echo OK: package.json trouve
 
+REM Check if node_modules exists
 if not exist "node_modules" (
-    echo.
     echo Installation des dependances...
     call npm install
     if errorlevel 1 (
+        echo.
         echo ERREUR lors de npm install
+        echo.
         pause
         exit /b 1
     )
-    echo OK: Dependances installees
 )
 
 echo.
@@ -32,18 +40,23 @@ echo DEMARRAGE DU SERVEUR
 echo ========================================
 echo.
 echo URL: http://localhost:3000
-echo Pour arreter: Appuyez sur Ctrl+C
+echo.
+echo En attente du serveur...
 echo.
 
-call npm start
+REM Start npm and capture any errors
+npm start
 
-if errorlevel 1 (
-    echo.
-    echo ========================================
-    echo ERREUR DETECTEE - Voir les messages ci-dessus
-    echo ========================================
-    pause
-    exit /b 1
-)
-
+REM If we get here, npm failed
+echo.
+echo ========================================
+echo ERREUR AU DEMARRAGE!
+echo ========================================
+echo.
+echo Si tu vois une erreur ci-dessus, copie-la et dis-la moi!
+echo.
+echo Appuyez sur une touche pour fermer...
+echo.
 pause
+
+exit /b 1
