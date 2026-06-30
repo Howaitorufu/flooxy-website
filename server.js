@@ -325,6 +325,81 @@ app.get('/api/user/profile', authenticateToken, (req, res) => {
     });
 });
 
+// Games endpoint
+app.get('/api/games', (req, res) => {
+    const games = [
+        {
+            id: 1,
+            title: 'Shadow Realm',
+            genre: 'RPG',
+            rating: 4.8,
+            players: 125000,
+            image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
+        },
+        {
+            id: 2,
+            title: 'Neon Rush',
+            genre: 'FPS',
+            rating: 4.6,
+            players: 98000,
+            image: 'https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
+        },
+        {
+            id: 3,
+            title: 'Mythos Legends',
+            genre: 'RPG',
+            rating: 4.9,
+            players: 156000,
+            image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
+        },
+        {
+            id: 4,
+            title: 'Galaxy Wars',
+            genre: 'Strategy',
+            rating: 4.5,
+            players: 87000,
+            image: 'https://images.unsplash.com/photo-1538481072177-d627dface115?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
+        }
+    ];
+    res.json({ games });
+});
+
+// Forum posts endpoint
+app.get('/api/forum/posts', (req, res) => {
+    const posts = [
+        {
+            id: 1,
+            title: 'Bienvenue sur Fløøxy\'s Community!',
+            author: 'Admin',
+            category: 'General',
+            content: 'Bienvenue! Partagez vos expériences gaming ici.',
+            likes: 245,
+            comments: 32,
+            createdAt: new Date()
+        }
+    ];
+    res.json({ posts });
+});
+
+// Contact endpoint
+app.post('/api/contact', (req, res) => {
+    try {
+        const { name, email, message } = req.body;
+
+        if (!name || !email || !message) {
+            return res.status(400).json({ message: 'Tous les champs sont requis' });
+        }
+
+        // Log contact message (dans un vrai app, sauvegarder en DB)
+        console.log('Contact message:', { name, email, message, date: new Date() });
+
+        res.json({ message: 'Message reçu avec succès' });
+    } catch (error) {
+        console.error('Erreur contact:', error);
+        res.status(500).json({ message: 'Erreur serveur' });
+    }
+});
+
 // Update user profile
 app.put('/api/user/profile', authenticateToken, async (req, res) => {
     try {

@@ -3,157 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fløøxy's Community - Plateforme Gaming</title>
+    <title>Fløøxy's Community - Plateforme Gaming Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
                 <i class="fas fa-gamepad"></i>
-                <h1>Fløøxy's Community</h1>
+                <span>Fløøxy's Community</span>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Accueil</a></li>
-                    <li><a href="#">Jeux</a></li>
-                    <li><a href="#">Communauté</a></li>
-                    <li><a href="#">Forum</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <button class="btn btn-outline" id="loginBtn">Se connecter</button>
-                <button class="btn btn-primary" id="signupBtn">S'inscrire</button>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Accueil</a></li>
+                <li><a href="#games" class="nav-link">Jeux</a></li>
+                <li><a href="#community" class="nav-link">Communauté</a></li>
+                <li><a href="#forum" class="nav-link">Forum</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-auth">
+                <button class="btn-login" id="loginBtn">Se connecter</button>
+                <button class="btn-signup" id="signupBtn">S'inscrire</button>
+                <div class="user-dropdown" id="userDropdown" style="display: none;">
+                    <button class="btn-profile" id="profileBtn">Mon Profil</button>
+                    <button class="btn-logout" id="logoutBtn">Déconnexion</button>
+                </div>
             </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-content">
-            <h2>Bienvenue dans Fløøxy's Community</h2>
-            <p>Rejoignez notre communauté de joueurs passionnés, partagez vos expériences et découvrez des jeux extraordinaires.</p>
+            <h1>Bienvenue dans Fløøxy's Community</h1>
+            <p>La plateforme gaming #1 pour les joueurs passionnés</p>
             <div class="hero-buttons">
-                <button class="btn btn-primary">Rejoindre la communauté</button>
-                <button class="btn btn-outline">En savoir plus</button>
+                <button class="btn btn-primary" id="exploreBtn">Découvrir les jeux</button>
+                <button class="btn btn-secondary">Rejoindre la communauté</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3 id="userCount">0</h3>
+                    <p>Joueurs actifs</p>
+                </div>
+                <div class="stat">
+                    <h3 id="gameCount">0</h3>
+                    <p>Jeux répertoriés</p>
+                </div>
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>Support disponible</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="categories-section">
-        <h2 class="section-title">Notre Communauté</h2>
-        <div class="categories">
-            <div class="category-card">
+    <!-- Games Section -->
+    <section class="games" id="games">
+        <div class="section-header">
+            <h2>Jeux Populaires</h2>
+            <div class="search-bar">
+                <input type="text" id="searchGames" placeholder="Chercher un jeu...">
+                <select id="filterGenre">
+                    <option value="">Tous les genres</option>
+                    <option value="RPG">RPG</option>
+                    <option value="FPS">FPS</option>
+                    <option value="Strategy">Stratégie</option>
+                    <option value="Adventure">Aventure</option>
+                    <option value="Racing">Course</option>
+                </select>
+            </div>
+        </div>
+        <div class="games-grid" id="gamesGrid">
+            <!-- Les jeux seront chargés ici par JavaScript -->
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community" id="community">
+        <div class="section-header">
+            <h2>Rejoignez la Communauté</h2>
+            <p>Connectez-vous avec d'autres joueurs, partagez vos expériences</p>
+        </div>
+        <div class="community-grid">
+            <div class="community-card">
                 <i class="fas fa-users"></i>
-                <h3>Joueurs</h3>
-                <p>Connectez-vous avec d'autres passionnés</p>
+                <h3>50K+ Joueurs</h3>
+                <p>Une communauté active et bienveillante</p>
             </div>
-            <div class="category-card">
-                <i class="fas fa-gamepad"></i>
-                <h3>Jeux</h3>
-                <p>Découvrez les meilleurs jeux</p>
+            <div class="community-card">
+                <i class="fas fa-comments"></i>
+                <h3>Forum Actif</h3>
+                <p>Discutez, partagez astuces et stratégies</p>
             </div>
-            <div class="category-card">
-                <i class="fas fa-chat"></i>
-                <h3>Forum</h3>
-                <p>Discutez et partagez vos astuces</p>
-            </div>
-            <div class="category-card">
+            <div class="community-card">
                 <i class="fas fa-trophy"></i>
                 <h3>Tournois</h3>
-                <p>Participez à des compétitions</p>
+                <p>Compétitions hebdomadaires avec récompenses</p>
             </div>
-            <div class="category-card">
-                <i class="fas fa-star"></i>
-                <h3>Événements</h3>
-                <p>Rejoignez nos événements exclusifs</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section">
-        <h2 class="section-title">Fonctionnalités</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fas fa-lock"></i>
-                <h3>Sécurisé</h3>
-                <p>Vos données sont protégées avec les derniers standards de sécurité</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-cloud"></i>
-                <h3>Sauvegarde Cloud</h3>
-                <p>Vos données sont sauvegardées automatiquement</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Mobile Friendly</h3>
-                <p>Accédez à votre compte partout et n'importe quand</p>
-            </div>
-            <div class="feature-card">
+            <div class="community-card">
                 <i class="fas fa-headset"></i>
-                <h3>Support 24/7</h3>
-                <p>Notre équipe est toujours là pour vous aider</p>
+                <h3>Support Premium</h3>
+                <p>Support prioritaire pour les membres</p>
             </div>
         </div>
     </section>
 
-    <!-- Newsletter -->
-    <section class="newsletter">
-        <h2>Restez informé</h2>
-        <p>Recevez les dernières nouvelles et mises à jour de la communauté</p>
-        <form class="newsletter-form" id="newsletterForm">
-            <input type="email" placeholder="Votre adresse email" required>
-            <button type="submit" class="btn btn-primary">S'inscrire</button>
+    <!-- Forum Section -->
+    <section class="forum" id="forum">
+        <div class="section-header">
+            <h2>Forum de Discussion</h2>
+            <button class="btn btn-primary" id="newPostBtn">Créer un post</button>
+        </div>
+        <div class="posts-container" id="postsContainer">
+            <!-- Les posts seront chargés ici -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <h2>Nous Contacter</h2>
+            <p>Des questions? Nous sommes là pour vous aider</p>
+        </div>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <input type="text" placeholder="Votre nom" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Votre email" required>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Votre message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="footer-content">
-            <div class="footer-column">
-                <h3>Fløøxy's Community</h3>
-                <p>Votre plateforme de référence pour la communauté gaming. Sécurisée, moderne et conçue pour vous.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+            <div class="footer-section">
+                <h4>Fløøxy's Community</h4>
+                <p>La meilleure plateforme gaming en ligne</p>
+                <div class="social-links">
+                    <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="footer-column">
-                <h3>Liens Rapides</h3>
+            <div class="footer-section">
+                <h4>Liens Rapides</h4>
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Jeux</a></li>
-                    <li><a href="#">Communauté</a></li>
-                    <li><a href="#">Forum</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li><a href="#games">Jeux</a></li>
+                    <li><a href="#community">Communauté</a></li>
+                    <li><a href="#forum">Forum</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
-                <h3>Légal</h3>
+            <div class="footer-section">
+                <h4>Légal</h4>
                 <ul>
                     <li><a href="#">Conditions d'utilisation</a></li>
                     <li><a href="#">Politique de confidentialité</a></li>
                     <li><a href="#">Politique de cookies</a></li>
-                    <li><a href="#">RGPD</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
-                <h3>Contact</h3>
-                <ul>
-                    <li><i class="fas fa-envelope"></i> contact@flooxycommunity.fr</li>
-                    <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
-                    <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
-                </ul>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>📧 contact@flooxycommunity.fr</p>
+                <p>📞 +33 1 23 45 67 89</p>
+                <p>🌍 Paris, France</p>
             </div>
         </div>
-        <div class="copyright">
+        <div class="footer-bottom">
             <p>&copy; 2026 Fløøxy's Community. Tous droits réservés.</p>
         </div>
     </footer>
@@ -161,21 +186,19 @@
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 class="modal-title">Se connecter</h2>
+            <span class="close">&times;</span>
+            <h2>Se Connecter</h2>
             <form id="loginForm">
                 <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" required>
+                    <label>Email</label>
+                    <input type="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="loginPassword">Mot de passe</label>
-                    <input type="password" id="loginPassword" required>
+                    <label>Mot de passe</label>
+                    <input type="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Se connecter</button>
-                <p style="text-align: center; margin-top: 1rem;">
-                    Pas encore inscrit? <a href="#" id="switchToSignup" style="color: var(--primary);">Créer un compte</a>
-                </p>
+                <p>Pas encore inscrit? <a href="#" id="switchToSignup">S'inscrire</a></p>
             </form>
         </div>
     </div>
@@ -183,69 +206,68 @@
     <!-- Signup Modal -->
     <div class="modal" id="signupModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 class="modal-title">S'inscrire</h2>
+            <span class="close">&times;</span>
+            <h2>S'Inscrire</h2>
             <form id="signupForm">
                 <div class="form-group">
-                    <label for="signupUsername">Nom d'utilisateur</label>
-                    <input type="text" id="signupUsername" required>
-                    <small id="usernameError" style="color: #ff6b35; display: none;"></small>
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" required>
                 </div>
                 <div class="form-group">
-                    <label for="signupEmail">Email</label>
-                    <input type="email" id="signupEmail" required>
-                    <small id="emailError" style="color: #ff6b35; display: none;"></small>
+                    <label>Email</label>
+                    <input type="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="signupPassword">Mot de passe</label>
-                    <input type="password" id="signupPassword" required>
-                    <small style="color: #aaa;">Min. 8 caractères, 1 majuscule, 1 chiffre</small>
-                    <small id="passwordError" style="color: #ff6b35; display: none;"></small>
+                    <label>Mot de passe</label>
+                    <input type="password" required>
+                    <small>Min. 8 caractères, 1 majuscule, 1 chiffre</small>
                 </div>
                 <div class="form-group">
-                    <label for="signupConfirmPassword">Confirmer le mot de passe</label>
-                    <input type="password" id="signupConfirmPassword" required>
-                    <small id="confirmError" style="color: #ff6b35; display: none;"></small>
+                    <label>Confirmer le mot de passe</label>
+                    <input type="password" required>
                 </div>
                 <div class="form-group">
-                    <input type="checkbox" id="agreeTerms" required>
-                    <label for="agreeTerms" style="display: inline; margin-left: 0.5rem;">
-                        J'accepte les <a href="#" style="color: var(--primary);">conditions d'utilisation</a>
-                    </label>
+                    <input type="checkbox" required>
+                    <label>J'accepte les conditions d'utilisation</label>
                 </div>
                 <button type="submit" class="btn btn-primary">S'inscrire</button>
-                <p style="text-align: center; margin-top: 1rem;">
-                    Déjà inscrit? <a href="#" id="switchToLogin" style="color: var(--primary);">Se connecter</a>
-                </p>
+                <p>Déjà inscrit? <a href="#" id="switchToLogin">Se connecter</a></p>
             </form>
         </div>
     </div>
 
-    <!-- User Profile -->
-    <div class="user-profile" id="userProfile">
-        <div class="profile-header">
-            <div class="profile-avatar">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="profile-info">
-                <h3 id="profileName">Utilisateur</h3>
-                <p id="profileEmail">email@example.com</p>
-            </div>
-        </div>
-        <div class="profile-menu">
-            <a href="#"><i class="fas fa-user"></i> Mon Profil</a>
-            <a href="#"><i class="fas fa-gamepad"></i> Mes Jeux</a>
-            <a href="#"><i class="fas fa-heart"></i> Favoris</a>
-            <a href="#"><i class="fas fa-cog"></i> Paramètres</a>
-            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+    <!-- New Post Modal -->
+    <div class="modal" id="newPostModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Créer un Post</h2>
+            <form id="newPostForm">
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Contenu</label>
+                    <textarea rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <select required>
+                        <option value="">Sélectionner une catégorie</option>
+                        <option value="General">Général</option>
+                        <option value="Games">Jeux</option>
+                        <option value="Events">Événements</option>
+                        <option value="Help">Aide</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Publier</button>
+            </form>
         </div>
     </div>
 
     <!-- Notification -->
-    <div class="notification" id="notification">
-        <span id="notificationText"></span>
-    </div>
+    <div class="notification" id="notification"></div>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
