@@ -456,14 +456,19 @@ app.post('/api/contact', (req, res) => {
 // Update user profile
 app.put('/api/user/profile', authenticateToken, async (req, res) => {
     try {
+        console.log('📝 Mise à jour profil demandée pour:', req.user.id);
+        console.log('Données reçues:', req.body);
+
         const users = getUsers();
         const userIndex = users.findIndex(u => u.id === req.user.id);
 
         if (userIndex === -1) {
+            console.log('❌ Utilisateur non trouvé:', req.user.id);
             return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
         const user = users[userIndex];
+        console.log('✅ Utilisateur trouvé:', user.username);
 
         // Update allowed fields
         if (req.body.email && req.body.email !== user.email) {
@@ -477,12 +482,12 @@ app.put('/api/user/profile', authenticateToken, async (req, res) => {
         }
 
         // Personalization fields
-        if (req.body.bio) user.bio = req.body.bio;
-        if (req.body.country) user.country = req.body.country;
-        if (req.body.favoriteGame) user.favoriteGame = req.body.favoriteGame;
-        if (req.body.discord) user.discord = req.body.discord;
-        if (req.body.twitch) user.twitch = req.body.twitch;
-        if (req.body.achievements) user.achievements = req.body.achievements;
+        user.bio = req.body.bio || '';
+        user.country = req.body.country || '';
+        user.favoriteGame = req.body.favoriteGame || '';
+        user.discord = req.body.discord || '';
+        user.twitch = req.body.twitch || '';
+        user.achievements = req.body.achievements || '';
 
         // Preferences
         user.profilePublic = req.body.profilePublic !== false;
@@ -491,8 +496,10 @@ app.put('/api/user/profile', authenticateToken, async (req, res) => {
 
         user.updatedAt = new Date();
 
+        console.log('💾 Sauvegarde des utilisateurs...');
         saveUsers(users);
         backupDatabase();
+        console.log('✅ Profil sauvegardé avec succès!');
 
         res.json({
             message: 'Profil mis à jour',
@@ -508,13 +515,16 @@ app.put('/api/user/profile', authenticateToken, async (req, res) => {
                 achievements: user.achievements,
                 profilePublic: user.profilePublic,
                 emailNotifs: user.emailNotifs,
-                darkMode: user.darkMode
+                darkMode: user.darkMode,
+                createdAt: user.createdAt,
+                lastLogin: user.lastLogin,
+                verified: user.verified
             }
         });
 
     } catch (error) {
-        console.error('Erreur update profile:', error);
-        res.status(500).json({ message: 'Erreur serveur' });
+        console.error('❌ Erreur update profile:', error);
+        res.status(500).json({ message: 'Erreur serveur: ' + error.message });
     }
 });
 

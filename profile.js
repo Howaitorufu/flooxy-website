@@ -114,6 +114,8 @@ async function handleEditProfile(e) {
         darkMode: document.getElementById('darkMode').checked
     };
 
+    console.log('Envoi des données:', profileData);
+
     try {
         const response = await fetch(`${API_URL}/user/profile`, {
             method: 'PUT',
@@ -124,23 +126,33 @@ async function handleEditProfile(e) {
             body: JSON.stringify(profileData)
         });
 
+        console.log('Réponse serveur:', response.status, response.statusText);
+
         const data = await response.json();
+        console.log('Données reçues:', data);
 
         if (response.ok) {
-            showNotification('Profil mis à jour avec succès!', 'success');
+            showNotification('✅ Profil sauvegardé avec succès!', 'success');
+            console.log('Profil sauvegardé!');
+
             document.getElementById('successMessage').classList.add('show');
             setTimeout(() => {
                 document.getElementById('successMessage').classList.remove('show');
             }, 3000);
 
             // Update local user data
-            Object.assign(currentUser, profileData);
-            localStorage.setItem('user', JSON.stringify(currentUser));
+            if (data.user) {
+                Object.assign(currentUser, data.user);
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                console.log('Données locales mises à jour');
+            }
         } else {
-            showNotification(data.message || 'Erreur lors de la mise à jour', 'error');
+            console.error('Erreur serveur:', data);
+            showNotification('❌ ' + (data.message || 'Erreur lors de la mise à jour'), 'error');
         }
     } catch (error) {
-        showNotification('Erreur serveur', 'error');
+        console.error('Erreur fetch:', error);
+        showNotification('❌ Erreur de connexion au serveur', 'error');
     }
 }
 
