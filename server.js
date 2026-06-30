@@ -19,6 +19,19 @@ app.use(cors({
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
+// Serve static files
+app.use(express.static(path.join(__dirname, '.')));
+
+// Serve index.html for root
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Serve admin.html for /admin
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
 // Database helpers
 const DB_PATH = process.env.DB_PATH || './data/users.json';
 const BACKUP_PATH = process.env.BACKUP_PATH || './data/backup';
