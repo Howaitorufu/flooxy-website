@@ -12,8 +12,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+const corsOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['http://localhost:3000', 'http://localhost:5000'];
 app.use(cors({
-    origin: process.env.CORS_ORIGIN.split(','),
+    origin: corsOrigins,
     credentials: true
 }));
 app.use(bodyParser.json({ limit: '10mb' }));
