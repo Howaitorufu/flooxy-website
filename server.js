@@ -497,6 +497,62 @@ app.delete('/api/user/account', authenticateToken, (req, res) => {
     }
 });
 
+// Admin Dashboard
+app.get('/api/admin/stats', authenticateToken, (req, res) => {
+    const users = getUsers();
+    const stats = {
+        totalUsers: users.length,
+        onlineUsers: Math.floor(Math.random() * 500) + 100,
+        totalGames: 12,
+        totalPosts: 456,
+        newUsersThisWeek: 23,
+        activeNow: Math.floor(Math.random() * 300) + 50
+    };
+    res.json(stats);
+});
+
+app.get('/api/admin/users', authenticateToken, (req, res) => {
+    const users = getUsers();
+    const sanitized = users.map(u => ({
+        id: u.id,
+        username: u.username,
+        email: u.email,
+        createdAt: u.createdAt,
+        lastLogin: u.lastLogin,
+        verified: u.verified
+    }));
+    res.json({ users: sanitized });
+});
+
+app.delete('/api/admin/users/:id', authenticateToken, (req, res) => {
+    const users = getUsers();
+    const filteredUsers = users.filter(u => u.id !== req.params.id);
+    saveUsers(filteredUsers);
+    res.json({ message: 'Utilisateur supprimé' });
+});
+
+app.post('/api/admin/backup', authenticateToken, (req, res) => {
+    try {
+        const data = fs.readFileSync(DB_PATH, 'utf8');
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const backupFile = path.join(BACKUP_PATH, `backup-admin-${timestamp}.json`);
+        fs.writeFileSync(backupFile, data);
+        res.json({ message: 'Sauvegarde créée', file: backupFile });
+    } catch (error) {
+        res.status(500).json({ message: 'Erreur sauvegarde' });
+    }
+});
+
+app.get('/api/admin/logs', authenticateToken, (req, res) => {
+    const logs = [
+        'Server started at port 3000',
+        '250 users online',
+        '12 games active',
+        'Last backup: 2 hours ago'
+    ];
+    res.json({ logs });
+});
+
 // 404
 app.use((req, res) => {
     res.status(404).json({ message: 'Route non trouvée' });

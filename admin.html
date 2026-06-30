@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Fløøxy's Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-lock"></i>
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#users" class="nav-item" data-section="users">
+                    <i class="fas fa-users"></i> Utilisateurs
+                </a>
+                <a href="#games" class="nav-item" data-section="games">
+                    <i class="fas fa-gamepad"></i> Jeux
+                </a>
+                <a href="#posts" class="nav-item" data-section="posts">
+                    <i class="fas fa-comments"></i> Posts
+                </a>
+                <a href="#moderation" class="nav-item" data-section="moderation">
+                    <i class="fas fa-gavel"></i> Modération
+                </a>
+                <a href="#analytics" class="nav-item" data-section="analytics">
+                    <i class="fas fa-bar-chart"></i> Analytics
+                </a>
+                <a href="#settings" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i> Paramètres
+                </a>
+                <a href="#" id="logoutAdmin" class="nav-item logout">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <h1 id="pageTitle">Dashboard</h1>
+                <div class="top-bar-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Rechercher...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button class="btn-refresh">
+                        <i class="fas fa-sync"></i> Actualiser
+                    </button>
+                    <div class="admin-profile">
+                        <img src="https://via.placeholder.com/40" alt="Admin">
+                        <span id="adminName">Admin</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon users">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Utilisateurs</h3>
+                                <p class="stat-number" id="totalUsers">0</p>
+                                <small>+12% cette semaine</small>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon games">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Jeux</h3>
+                                <p class="stat-number" id="totalGames">0</p>
+                                <small>12 actifs</small>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon posts">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Posts</h3>
+                                <p class="stat-number" id="totalPosts">0</p>
+                                <small>+45 aujourd'hui</small>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon revenue">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Revenus</h3>
+                                <p class="stat-number">$12.5K</p>
+                                <small>+8% ce mois</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <h3>Activité Récente</h3>
+                            <div class="activity-list" id="activityList">
+                                <div class="activity-item">
+                                    <i class="fas fa-user-plus"></i>
+                                    <div>
+                                        <p>Nouvel utilisateur inscrit</p>
+                                        <small>il y a 2 heures</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>Utilisateurs En Ligne</h3>
+                            <div class="online-stats">
+                                <div class="online-item">
+                                    <span>En ligne</span>
+                                    <strong id="usersOnline">245</strong>
+                                </div>
+                                <div class="online-item">
+                                    <span>Cette semaine</span>
+                                    <strong id="usersWeek">1,234</strong>
+                                </div>
+                                <div class="online-item">
+                                    <span>Ce mois</span>
+                                    <strong id="usersMonth">5,678</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section id="users" class="section">
+                    <div class="section-header">
+                        <h2>Gestion des Utilisateurs</h2>
+                        <button class="btn btn-primary" id="addUserBtn">
+                            <i class="fas fa-plus"></i> Ajouter Utilisateur
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nom d'utilisateur</th>
+                                    <th>Email</th>
+                                    <th>Date d'inscription</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- Données chargées via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Games Section -->
+                <section id="games" class="section">
+                    <div class="section-header">
+                        <h2>Gestion des Jeux</h2>
+                        <button class="btn btn-primary" id="addGameBtn">
+                            <i class="fas fa-plus"></i> Ajouter Jeu
+                        </button>
+                    </div>
+                    <div class="games-admin-grid" id="gamesAdminGrid">
+                        <!-- Jeux chargés via JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Posts Section -->
+                <section id="posts" class="section">
+                    <div class="section-header">
+                        <h2>Gestion des Posts</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Auteur</th>
+                                    <th>Catégorie</th>
+                                    <th>Date</th>
+                                    <th>Likes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="postsTableBody">
+                                <!-- Données chargées via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Moderation Section -->
+                <section id="moderation" class="section">
+                    <div class="section-header">
+                        <h2>Modération & Signalements</h2>
+                    </div>
+                    <div class="moderation-list" id="moderationList">
+                        <div class="moderation-item warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div>
+                                <h4>Post inapproprié signalé</h4>
+                                <p>Titre: "Comment tricher aux jeux"</p>
+                                <small>5 signalements - Auteur: JohnDoe</small>
+                            </div>
+                            <div class="actions">
+                                <button class="btn btn-small btn-success">Approuver</button>
+                                <button class="btn btn-small btn-danger">Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics" class="section">
+                    <div class="section-header">
+                        <h2>Analytics & Statistiques</h2>
+                    </div>
+                    <div class="analytics-grid">
+                        <div class="card">
+                            <h3>Trafic Hebdomadaire</h3>
+                            <div class="chart-placeholder">
+                                <canvas id="trafficChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>Top Jeux</h3>
+                            <div class="top-list" id="topGames">
+                                <div class="top-item">
+                                    <span>Shadow Realm</span>
+                                    <strong>4,532 joueurs</strong>
+                                </div>
+                                <div class="top-item">
+                                    <span>Neon Rush</span>
+                                    <strong>3,456 joueurs</strong>
+                                </div>
+                                <div class="top-item">
+                                    <span>Galaxy Wars</span>
+                                    <strong>2,789 joueurs</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="section">
+                    <div class="section-header">
+                        <h2>Paramètres du Site</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3>Général</h3>
+                            <form id="generalSettings">
+                                <div class="form-group">
+                                    <label>Nom du site</label>
+                                    <input type="text" value="Fløøxy's Community">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea>La meilleure plateforme gaming</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email de contact</label>
+                                    <input type="email" value="contact@flooxycommunity.fr">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Sécurité</h3>
+                            <form id="securitySettings">
+                                <div class="form-group">
+                                    <label>Authentification 2FA</label>
+                                    <div class="toggle">
+                                        <input type="checkbox" id="twoFAToggle">
+                                        <label for="twoFAToggle"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Exiger email vérifié</label>
+                                    <div class="toggle">
+                                        <input type="checkbox" id="emailVerifyToggle" checked>
+                                        <label for="emailVerifyToggle"></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </form>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Base de Données</h3>
+                            <div class="db-actions">
+                                <button class="btn btn-secondary" id="backupBtn">
+                                    <i class="fas fa-database"></i> Sauvegarder maintenant
+                                </button>
+                                <button class="btn btn-secondary" id="restoreBtn">
+                                    <i class="fas fa-undo"></i> Restaurer sauvegarde
+                                </button>
+                                <button class="btn btn-danger" id="clearCacheBtn">
+                                    <i class="fas fa-trash"></i> Vider le cache
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3>Maintenance</h3>
+                            <div class="maintenance-actions">
+                                <div class="form-group">
+                                    <label>Mode maintenance</label>
+                                    <div class="toggle">
+                                        <input type="checkbox" id="maintenanceToggle">
+                                        <label for="maintenanceToggle"></label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary" id="logsBtn">
+                                    <i class="fas fa-file-alt"></i> Voir les logs
+                                </button>
+                                <button class="btn btn-secondary" id="healthBtn">
+                                    <i class="fas fa-heartbeat"></i> Vérifier la santé
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="addUserModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Ajouter un Utilisateur</h2>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Rôle</label>
+                    <select required>
+                        <option value="user">Utilisateur</option>
+                        <option value="moderator">Modérateur</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
