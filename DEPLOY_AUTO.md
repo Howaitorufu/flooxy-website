@@ -256,8 +256,23 @@ CORS_ORIGIN=http://localhost:3000
 | **npm install** | ✅ Works | 170 packages |
 | **npm start** | ✅ Works | Port 3000 |
 | **Netlify Deploy** | ✅ Live | Build green |
+| **Frontend Site** | ✅ Complete | index.html + CSS + JS |
+| **Admin Dashboard** | ✅ Complete | admin.html + full management |
+| **Backend API** | ✅ Complete | 15+ endpoints |
 | **Domaine EU.org** | ⏳ Pending | À configurer DNS |
 | **SSL Certificate** | ✅ Auto | Netlify + Acme |
+
+---
+
+## 🎮 PAGES DISPONIBLES
+
+- 📄 **index.html** - Site principal (Jeux, Communauté, Forum, Contact)
+- 🔐 **admin.html** - Dashboard Admin (Gestion complète)
+
+### Access Admin:
+1. Se connecter via index.html
+2. Aller à `admin.html` (sécurisé par JWT)
+3. Accès complet à tous les outils d'administration
 
 ---
 
