@@ -20,6 +20,7 @@ const notification = document.getElementById('notification');
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
+    loadStats();
     loadGames();
     loadPosts();
     checkAuthStatus();
@@ -207,6 +208,17 @@ async function loadGames() {
     } catch (error) {
         console.error('Erreur lors du chargement des jeux:', error);
         renderDefaultGames();
+    }
+}
+
+async function loadStats() {
+    try {
+        const response = await fetch(`${API_URL}/stats`);
+        const stats = await response.json();
+        document.getElementById('userCount').textContent = stats.totalUsers;
+        document.getElementById('gameCount').textContent = stats.totalGames;
+    } catch (error) {
+        console.error('Erreur stats:', error);
     }
 }
 

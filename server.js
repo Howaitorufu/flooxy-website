@@ -339,6 +339,29 @@ app.get('/api/user/profile', authenticateToken, (req, res) => {
     });
 });
 
+// Stats endpoint
+app.get('/api/stats', (req, res) => {
+    const users = getUsers();
+    const games = [
+        { id: 1, title: 'Shadow Realm', genre: 'RPG', rating: 4.8, players: 125000 },
+        { id: 2, title: 'Neon Rush', genre: 'FPS', rating: 4.6, players: 98000 },
+        { id: 3, title: 'Mythos Legends', genre: 'RPG', rating: 4.9, players: 156000 },
+        { id: 4, title: 'Galaxy Wars', genre: 'Strategy', rating: 4.5, players: 87000 },
+        { id: 5, title: 'Urban Chase', genre: 'Racing', rating: 4.7, players: 112000 },
+        { id: 6, title: 'Adventure Quest', genre: 'Adventure', rating: 4.4, players: 95000 }
+    ];
+
+    res.json({
+        totalUsers: users.length,
+        totalGames: games.length,
+        totalPlayers: games.reduce((sum, g) => sum + g.players, 0),
+        onlineUsers: Math.floor(Math.random() * 500) + 100,
+        activeGames: games.length,
+        newUsersThisWeek: Math.floor(users.length * 0.2),
+        avgRating: (games.reduce((sum, g) => sum + g.rating, 0) / games.length).toFixed(1)
+    });
+});
+
 // Games endpoint
 app.get('/api/games', (req, res) => {
     const games = [
@@ -373,6 +396,22 @@ app.get('/api/games', (req, res) => {
             rating: 4.5,
             players: 87000,
             image: 'https://images.unsplash.com/photo-1538481072177-d627dface115?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
+        },
+        {
+            id: 5,
+            title: 'Urban Chase',
+            genre: 'Racing',
+            rating: 4.7,
+            players: 112000,
+            image: 'https://images.unsplash.com/photo-1493711662714-4c4eb0f696b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
+        },
+        {
+            id: 6,
+            title: 'Adventure Quest',
+            genre: 'Adventure',
+            rating: 4.4,
+            players: 95000,
+            image: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'
         }
     ];
     res.json({ games });
