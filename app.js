@@ -68,6 +68,11 @@ function setupEventListeners() {
     // Logout
     logoutBtn.addEventListener('click', handleLogout);
 
+    // Dashboard
+    document.getElementById('dashboardBtn').addEventListener('click', () => {
+        window.location.href = 'admin.html';
+    });
+
     // Nav links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
@@ -187,6 +192,14 @@ function updateAuthUI() {
         signupBtn.style.display = 'none';
         userDropdown.style.display = 'flex';
         newPostBtn.style.display = 'block';
+
+        // Check if admin
+        const dashboardBtn = document.getElementById('dashboardBtn');
+        if (currentUser.isAdmin || currentUser.role === 'admin') {
+            dashboardBtn.style.display = 'flex';
+        } else {
+            dashboardBtn.style.display = 'none';
+        }
     } else {
         loginBtn.style.display = 'block';
         signupBtn.style.display = 'block';
