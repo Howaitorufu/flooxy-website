@@ -1,0 +1,97 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║         🚀 FLØØXY'S COMMUNITY - INSTRUCTIONS DE DÉMARRAGE 🚀             ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📋 COMMENT LANCER LE SERVEUR:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🖥️ WINDOWS (CMD/PowerShell):
+
+Double-cliquez sur:
+  → run-server.bat
+
+OU en ligne de commande:
+  → cd C:\Users\Waxy360\Desktop\site internet
+  → run-server.bat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🐧 LINUX/MAC (Terminal/Bash):
+
+Lancez:
+  → chmod +x run-server.sh
+  → ./run-server.sh
+
+OU directement:
+  → bash run-server.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ QUAND LE SERVEUR EST LANCÉ:
+
+Tu devrais voir:
+
+    🚀 Fløøxy's Community serveur lancé sur http://localhost:3000
+    📁 Base de données: ./data/users.json
+    💾 Sauvegarde: ./data/backup
+    🔒 Sécurité: JWT + Bcrypt activée
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 ACCÉDER AU SITE:
+
+1. Ouvre ton navigateur
+2. Va à: http://localhost:3000/index.html
+3. OU: file:///C:/Users/Waxy360/Desktop/site%20internet/index.html
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🐛 VOIR LES ERREURS:
+
+✓ La fenêtre CMD/Terminal affichera tous les logs
+✓ Ouvre la console du navigateur (F12)
+✓ Onglet "Console" pour les erreurs JavaScript
+✓ Onglet "Network" pour les requêtes API
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🛑 ARRÊTER LE SERVEUR:
+
+Appuyez sur: Ctrl + C (dans la fenêtre du serveur)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❓ SI ÇA NE FONCTIONNE PAS:
+
+1. Vérifie que Node.js est installé:
+   → node --version
+   → npm --version
+
+2. Vérifie que tu es au bon dossier:
+   → C:\Users\Waxy360\Desktop\site internet
+
+3. Réinstalle les dépendances:
+   → npm install
+
+4. Lance le serveur:
+   → npm start
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📍 URL IMPORTANTES:
+
+Site Principal:  http://localhost:3000/index.html
+Admin Dashboard: http://localhost:3000/admin.html
+API Health:      http://localhost:3000/api/health
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 QUAND TU VOIS DES ERREURS:
+
+Copie le message d'erreur et dis-le moi!
+Je vais corriger et redéployer automatiquement.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Bon développement! 🚀
