@@ -1,0 +1,26 @@
+[build]
+command = "npm install"
+publish = "./"
+
+[dev]
+command = "npm start"
+port = 3000
+
+# Redirect all non-file requests to index.html (SPA)
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+# Headers for security
+[[headers]]
+for = "/*"
+[headers.values]
+  X-Content-Type-Options = "nosniff"
+  X-Frame-Options = "DENY"
+  X-XSS-Protection = "1; mode=block"
+
+# Environment variables
+[context.production.environment]
+JWT_SECRET = "change-this-in-production"
+NODE_ENV = "production"

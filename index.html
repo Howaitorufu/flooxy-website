@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fløøxy's Community - Plateforme Gaming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <h1>Fløøxy's Community</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Accueil</a></li>
+                    <li><a href="#">Jeux</a></li>
+                    <li><a href="#">Communauté</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn">Se connecter</button>
+                <button class="btn btn-primary" id="signupBtn">S'inscrire</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Bienvenue dans Fløøxy's Community</h2>
+            <p>Rejoignez notre communauté de joueurs passionnés, partagez vos expériences et découvrez des jeux extraordinaires.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Rejoindre la communauté</button>
+                <button class="btn btn-outline">En savoir plus</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <h2 class="section-title">Notre Communauté</h2>
+        <div class="categories">
+            <div class="category-card">
+                <i class="fas fa-users"></i>
+                <h3>Joueurs</h3>
+                <p>Connectez-vous avec d'autres passionnés</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Jeux</h3>
+                <p>Découvrez les meilleurs jeux</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-chat"></i>
+                <h3>Forum</h3>
+                <p>Discutez et partagez vos astuces</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-trophy"></i>
+                <h3>Tournois</h3>
+                <p>Participez à des compétitions</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-star"></i>
+                <h3>Événements</h3>
+                <p>Rejoignez nos événements exclusifs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="section-title">Fonctionnalités</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-lock"></i>
+                <h3>Sécurisé</h3>
+                <p>Vos données sont protégées avec les derniers standards de sécurité</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-cloud"></i>
+                <h3>Sauvegarde Cloud</h3>
+                <p>Vos données sont sauvegardées automatiquement</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile Friendly</h3>
+                <p>Accédez à votre compte partout et n'importe quand</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-headset"></i>
+                <h3>Support 24/7</h3>
+                <p>Notre équipe est toujours là pour vous aider</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Restez informé</h2>
+        <p>Recevez les dernières nouvelles et mises à jour de la communauté</p>
+        <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Votre adresse email" required>
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Fløøxy's Community</h3>
+                <p>Votre plateforme de référence pour la communauté gaming. Sécurisée, moderne et conçue pour vous.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Jeux</a></li>
+                    <li><a href="#">Communauté</a></li>
+                    <li><a href="#">Forum</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Légal</h3>
+                <ul>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Politique de cookies</a></li>
+                    <li><a href="#">RGPD</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contact@flooxycommunity.fr</li>
+                    <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Fløøxy's Community. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Se connecter</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Pas encore inscrit? <a href="#" id="switchToSignup" style="color: var(--primary);">Créer un compte</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">S'inscrire</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Nom d'utilisateur</label>
+                    <input type="text" id="signupUsername" required>
+                    <small id="usernameError" style="color: #ff6b35; display: none;"></small>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                    <small id="emailError" style="color: #ff6b35; display: none;"></small>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Mot de passe</label>
+                    <input type="password" id="signupPassword" required>
+                    <small style="color: #aaa;">Min. 8 caractères, 1 majuscule, 1 chiffre</small>
+                    <small id="passwordError" style="color: #ff6b35; display: none;"></small>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="signupConfirmPassword" required>
+                    <small id="confirmError" style="color: #ff6b35; display: none;"></small>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms" style="display: inline; margin-left: 0.5rem;">
+                        J'accepte les <a href="#" style="color: var(--primary);">conditions d'utilisation</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+                <p style="text-align: center; margin-top: 1rem;">
+                    Déjà inscrit? <a href="#" id="switchToLogin" style="color: var(--primary);">Se connecter</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Profile -->
+    <div class="user-profile" id="userProfile">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h3 id="profileName">Utilisateur</h3>
+                <p id="profileEmail">email@example.com</p>
+            </div>
+        </div>
+        <div class="profile-menu">
+            <a href="#"><i class="fas fa-user"></i> Mon Profil</a>
+            <a href="#"><i class="fas fa-gamepad"></i> Mes Jeux</a>
+            <a href="#"><i class="fas fa-heart"></i> Favoris</a>
+            <a href="#"><i class="fas fa-cog"></i> Paramètres</a>
+            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

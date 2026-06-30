@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub - Votre Plateforme de Jeux Vidéo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ff6b35;
+            --secondary: #2a9d8f;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #e9c46a;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(42, 157, 143, 0.8));
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5rem;
+            text-align: left;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Categories Section */
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .categories {
+            padding: 2rem 5rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: rgba(42, 157, 143, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            background: rgba(42, 157, 143, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 5rem;
+        }
+
+        .game-card {
+            background: rgba(42, 157, 143, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .game-image {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+        .game-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-info p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            height: 60px;
+            overflow: hidden;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .rating {
+            color: var(--accent);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.3), rgba(26, 26, 46, 0.9));
+            padding: 4rem 5rem;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #e0e0e0;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 30px 0 0 30px;
+            border: none;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #aaa;
+        }
+
+        .newsletter-form button {
+            border-radius: 0 30px 30px 0;
+            padding: 1rem 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 20, 0.9);
+            padding: 3rem 5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                padding: 0 2rem;
+                height: 70vh;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .categories {
+                padding: 2rem;
+            }
+            
+            .games-grid {
+                padding: 2rem;
+            }
+            
+            .newsletter {
+                padding: 3rem 2rem;
+            }
+            
+            footer {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .newsletter-form input, 
+            .newsletter-form button {
+                border-radius: 30px;
+                width: 100%;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+            animation: modalOpen 0.4s ease;
+        }
+
+        @keyframes modalOpen {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* User Profile */
+        .user-profile {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            z-index: 1001;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .user-profile.active {
+            transform: translateX(0);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .profile-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .profile-info p {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .profile-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .profile-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .profile-menu a:hover {
+            background: rgba(42, 157, 143, 0.3);
+        }
+
+        .profile-menu i {
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+            z-index: 1002;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <h1>GameHub</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Accueil</a></li>
+                    <li><a href="#">Jeux</a></li>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Communauté</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn">Se connecter</button>
+                <button class="btn btn-primary" id="signupBtn">S'inscrire</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Explorez le monde des jeux vidéo</h2>
+            <p>Découvrez les dernières sorties, rejoignez notre communauté de joueurs passionnés et partagez vos expériences gaming.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Explorer les jeux</button>
+                <button class="btn btn-outline">Voir les actualités</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <h2 class="section-title">Catégories de Jeux</h2>
+        <div class="categories">
+            <div class="category-card">
+                <i class="fas fa-dragon"></i>
+                <h3>RPG</h3>
+                <p>Jeux de rôle épique avec des histoires immersives</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-fighter-jet"></i>
+                <h3>Shooter</h3>
+                <p>Action intense et combats palpitants</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-robot"></i>
+                <h3>Stratégie</h3>
+                <p>Stratégies complexes et défis intellectuels</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-running"></i>
+                <h3>Aventure</h3>
+                <p>Explorations captivantes et histoires riches</p>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-users"></i>
+                <h3>Multi-joueur</h3>
+                <p>Jouez avec vos amis en ligne</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section class="games-section">
+        <h2 class="section-title">Jeux Populaires</h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80')"></div>
+                <div class="game-info">
+                    <h3>Shadow Realm</h3>
+                    <p>Un jeu d'aventure épique dans un monde fantastique rempli de mystères.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-star rating"></i> 4.8</span>
+                        <span><i class="fas fa-user"></i> 125K</span>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80')"></div>
+                <div class="game-info">
+                    <h3>Neon Rush</h3>
+                    <p>Un shooter futuriste avec des graphismes époustouflants.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-star rating"></i> 4.6</span>
+                        <span><i class="fas fa-user"></i> 98K</span>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80')"></div>
+                <div class="game-info">
+                    <h3>Mythos Legends</h3>
+                    <p>Un jeu de rôle avec une histoire épique et des quêtes uniques.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-star rating"></i> 4.9</span>
+                        <span><i class="fas fa-user"></i> 156K</span>
+                    </div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="game-image" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80')"></div>
+                <div class="game-info">
+                    <h3>Galaxy Wars</h3>
+                    <p>Un jeu de stratégie spatiale avec des combats intergalactiques.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-star rating"></i> 4.5</span>
+                        <span><i class="fas fa-user"></i> 87K</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Inscrivez-vous à notre newsletter</h2>
+        <p>Recevez les dernières actualités, offres spéciales et mises à jour de jeux.</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Votre adresse email">
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>GameHub</h3>
+                <p>Votre plateforme de référence pour tous les joueurs de jeux vidéo. Découvrez, partagez et connectez-vous avec d'autres passionnés.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Jeux</a></li>
+                    <li><a href="#">Actualités</a></li>
+                    <li><a href="#">Communauté</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Acheter des jeux</a></li>
+                    <li><a href="#">Créer un compte</a></li>
+                    <li><a href="#">Rechercher des amis</a></li>
+                    <li><a href="#">Participer à des tournois</a></li>
+                    <li><a href="#">Forum de discussion</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Rue du Jeu, Paris</li>
+                    <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                    <li><i class="fas fa-envelope"></i> contact@gamehub.fr</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 GameHub. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Se connecter</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Adresse Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">S'inscrire</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Nom complet</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Adresse Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Mot de passe</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="signupConfirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Profile -->
+    <div class="user-profile" id="userProfile">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-info">
+                <h3>John Doe</h3>
+                <p>Utilisateur Premium</p>
+            </div>
+        </div>
+        <div class="profile-menu">
+            <a href="#"><i class="fas fa-user"></i> Mon Profil</a>
+            <a href="#"><i class="fas fa-gamepad"></i> Mes Jeux</a>
+            <a href="#"><i class="fas fa-heart"></i> Favoris</a>
+            <a href="#"><i class="fas fa-cog"></i> Paramètres</a>
+            <a href="#"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationText">Message de notification</span>
+    </div>
+
+    <script>
+        // Modal functionality
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+        const userProfile = document.getElementById('userProfile');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+
+        // Open modals
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        signupBtn.addEventListener('click', () => {
+            signupModal.style.display = 'flex';
+        });
+
+        // Close modals
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'none';
+            });
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === signupModal) {
+                signupModal.style.display = 'none';
+            }
+        });
+
+        // Form submissions
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            showNotification('Connexion réussie ! Bienvenue, ' + email);
+            loginModal.style.display = 'none';
+            userProfile.classList.add('active');
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            showNotification('Inscription réussie ! Bienvenue, ' + name);
+            signupModal.style.display = 'none';
+        });
+
+        // Show notification
+        function showNotification(message) {
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Toggle user profile
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.profile-menu') || e.target.closest('.profile-header')) {
+                userProfile.classList.add('active');
+            } else if (!userProfile.contains(e.target) && !e.target.closest('#loginBtn, #signupBtn')) {
+                userProfile.classList.remove('active');
+            }
+        });
+
+        // Simulate loading
+        window.addEventListener('load', function() {
+            // Add loading effect to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.innerHTML = '<span class="loading"></span> Chargement...';
+                    setTimeout(() => {
+                        this.innerHTML = this.textContent;
+                    }, 1500);
+                });
+            });
+        });
+
+        // Game card hover effect
+        const gameCards = document.querySelectorAll('.game-card');
+        gameCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
