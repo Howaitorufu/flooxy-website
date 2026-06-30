@@ -142,14 +142,20 @@ async function handleEditProfile(e) {
 
             // Update local user data
             if (data.user) {
-                Object.assign(currentUser, data.user);
-                localStorage.setItem('user', JSON.stringify(currentUser));
-                console.log('Données locales mises à jour:', currentUser);
+                // Mise à jour complète du user
+                const updatedUser = {
+                    ...currentUser,
+                    ...data.user
+                };
+                currentUser = updatedUser;
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                console.log('✅ Données locales mises à jour complètement:', updatedUser);
 
-                // Recharge la page après 1 seconde pour afficher les changements
+                // Recharge les données du profil après 500ms
                 setTimeout(() => {
-                    location.reload();
-                }, 1000);
+                    console.log('Rechargement des données du profil...');
+                    loadProfile();
+                }, 500);
             }
         } else {
             console.error('Erreur serveur:', data);
