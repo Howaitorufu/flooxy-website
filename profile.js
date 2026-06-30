@@ -144,7 +144,12 @@ async function handleEditProfile(e) {
             if (data.user) {
                 Object.assign(currentUser, data.user);
                 localStorage.setItem('user', JSON.stringify(currentUser));
-                console.log('Données locales mises à jour');
+                console.log('Données locales mises à jour:', currentUser);
+
+                // Recharge la page après 1 seconde pour afficher les changements
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
             }
         } else {
             console.error('Erreur serveur:', data);
