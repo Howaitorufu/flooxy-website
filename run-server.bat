@@ -1,56 +1,48 @@
 @echo off
-chcp 65001 > nul
 cls
 echo.
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║      🚀 FLØØXY'S COMMUNITY - SERVER LAUNCHER 🚀           ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ========================================
+echo FLOOXY'S COMMUNITY - SERVER LAUNCHER
+echo ========================================
 echo.
-echo 📍 Dossier: %cd%
-echo.
-echo Vérification des fichiers...
+echo Verification des fichiers...
+
 if not exist "package.json" (
-    echo ❌ ERREUR: package.json non trouvé!
-    echo Assurez-vous d'être dans le dossier correct
+    echo ERREUR: package.json non trouve!
     pause
     exit /b 1
 )
-echo ✅ package.json trouvé
+echo OK: package.json trouve
 
 if not exist "node_modules" (
     echo.
-    echo 📦 Installation des dépendances (première fois)...
+    echo Installation des dependances...
     call npm install
     if errorlevel 1 (
-        echo ❌ Erreur lors de npm install
+        echo ERREUR lors de npm install
         pause
         exit /b 1
     )
-    echo ✅ Dépendances installées
+    echo OK: Dependances installees
 )
 
 echo.
-echo ╔════════════════════════════════════════════════════════════╗
-echo ║          🎮 Démarrage du serveur...                        ║
-echo ╚════════════════════════════════════════════════════════════╝
+echo ========================================
+echo DEMARRAGE DU SERVEUR
+echo ========================================
 echo.
-echo 📡 Serveur en cours de démarrage...
-echo 💻 URL: http://localhost:3000
-echo 🛑 Pour arrêter: Appuyez sur Ctrl+C
-echo.
-echo ════════════════════════════════════════════════════════════
+echo URL: http://localhost:3000
+echo Pour arreter: Appuyez sur Ctrl+C
 echo.
 
 call npm start
 
 if errorlevel 1 (
     echo.
-    echo ════════════════════════════════════════════════════════════
-    echo ❌ ERREUR DÉTECTÉE!
-    echo.
-    echo Lisez les messages ci-dessus pour plus de détails.
-    echo Appuyez sur une touche pour fermer...
-    pause > nul
+    echo ========================================
+    echo ERREUR DETECTEE - Voir les messages ci-dessus
+    echo ========================================
+    pause
     exit /b 1
 )
 
